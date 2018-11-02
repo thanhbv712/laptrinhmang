@@ -14,8 +14,14 @@
     </head>
     <body>
         <center><h2>Home Page</h2></center>
-        <% User user = (User) request.getSession().getAttribute("user");%>
-        Welcome <%= user.getUserName() %> <!-- Refer to the video to understand how this works -->
+        <% 
+            User user = (User) request.getSession().getAttribute("user");
+        
+            User demo = (User) request.getAttribute("demo");
+        
+        %>
+        Welcome <%= user.getUserName() %> 
+        <p>Demo <%= demo.getUserName() %> </p>
         <div style="text-align: right"><a href="logout">Logout</a></div>
     </body>
 </html>

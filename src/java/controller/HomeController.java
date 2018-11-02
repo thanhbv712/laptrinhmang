@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -24,6 +25,10 @@ public class HomeController extends Controller{
         if(!this.existUser(req)){
             resp.sendRedirect("login");
         }else{
+            //TODO
+            User demo = new User("phan", "12222222");
+            req.setAttribute("demo", demo);
+            
             req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
         } 
     }

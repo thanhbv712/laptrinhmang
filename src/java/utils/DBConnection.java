@@ -41,7 +41,7 @@ public class DBConnection {
     public boolean checkLogin(User user) {
         try {
             Statement state = this.conn.createStatement();
-            String sql = "SELECT username, password FROM players";
+            String sql = "SELECT username, password FROM players WHERE username = '" + user.getUserName() +"'";
             System.out.println(sql);
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
