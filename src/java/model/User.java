@@ -3,17 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bean;
+package model;
 
 /**
  *
  * @author buith
  */
-public class UserBean {
+public class User {
 
     private String userName;
     private String password;
 
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+    
+    
     public String getUserName() {
         return userName;
     }

@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author buith
+ * @author phantuan
  */
-public class HomeController extends Controller{
-    public HomeController(){
-        super();
+public class LogoutController extends HttpServlet{
+
+    public LogoutController() {
+        
     }
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!this.existUser(req)){
-            resp.sendRedirect("login");
-        }else{
-            req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
-        } 
+        
+        req.getSession().removeAttribute("user");
+        resp.sendRedirect("login");
     }
     
 }

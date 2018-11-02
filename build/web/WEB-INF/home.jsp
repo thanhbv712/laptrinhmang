@@ -4,7 +4,7 @@
     Author     : buith
 --%>
 
-<%@page import="bean.UserBean"%>
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,8 @@
     </head>
     <body>
         <center><h2>Home Page</h2></center>
-        Welcome <%= (String) request.getSession().getAttribute("username")  %> <!-- Refer to the video to understand how this works -->
-        <div style="text-align: right"><a href="LogoutServlet">Logout</a></div>
+        <% User user = (User) request.getSession().getAttribute("user");%>
+        Welcome <%= user.getUserName() %> <!-- Refer to the video to understand how this works -->
+        <div style="text-align: right"><a href="logout">Logout</a></div>
     </body>
 </html>

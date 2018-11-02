@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form name="form" action="index.jsp?controller=login" method="post" onsubmit="return validate()">
+        <form name="form" action="login" method="post" onsubmit="return validate()">
             <table align="center">
                 <tr>
                     <td>Username</td>

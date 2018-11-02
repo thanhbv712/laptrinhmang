@@ -1,24 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.User;
 
 /**
  *
  * @author buith
  */
 public class DBConnection {
-
-    public static Connection createConnection() {
-        Connection con = null;
+    public Connection conn = null;
+    public DBConnection(){
+        this.createConnection();
+    }
+    public void createConnection() {
+        
         String url = "jdbc:mysql://localhost:3306/laptrinhmang"; //MySQL URL and followed by the database name
         String username = "root"; //MySQL username
-        String password = ""; //MySQL password
+        String password = "root"; //MySQL password
 
         try {
             try {
@@ -26,11 +30,28 @@ public class DBConnection {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            con = (Connection) DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
-            System.out.println("Printing connection object " + con);
+            this.conn = (Connection) DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
+            System.out.println("Printing connection object " + conn);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return con;
+        
+    }
+    
+    public boolean checkLogin(User user) {
+        try {
+            Statement state = this.conn.createStatement();
+            String sql = "SELECT username, password FROM players";
+            System.out.println(sql);
+            ResultSet rs = state.executeQuery(sql);
+            while (rs.next()) {
+                if (user.getUserName().equals(rs.getString("username")) && user.getPassword().equals(rs.getString("password"))) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
