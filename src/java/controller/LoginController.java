@@ -6,6 +6,7 @@
 package controller;
 
 
+import DAO.LoginDAO;
 import model.User;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
@@ -37,14 +38,14 @@ public class LoginController extends Controller {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        
+        LoginDAO loginDAO = new LoginDAO();
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
 
         User user = new User(userName, password);
         
         
-        if(this.db.checkLogin(user)){
+        if(loginDAO.checkLogin(user)){
             request.getSession().setAttribute("user", user);
             response.sendRedirect("home");
         } else {

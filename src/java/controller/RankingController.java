@@ -9,27 +9,19 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
 
 /**
  *
  * @author buith
  */
-public class HomeController extends Controller{
-    public HomeController(){
-        super();
+public class RankingController extends Controller{
+
+    public RankingController() {
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!this.existUser(req)){
-            resp.sendRedirect("login");
-        }else{
-            //TODO
-            User demo = new User("phan", "12222222");
-            req.setAttribute("demo", demo);
-            
-            req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
-        } 
+        resp.sendRedirect("ranking");
     }
     
 }
