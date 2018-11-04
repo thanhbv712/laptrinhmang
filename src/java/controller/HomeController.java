@@ -5,7 +5,9 @@
  */
 package controller;
 
+import DAO.HomeDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import model.User;
  * @author buith
  */
 public class HomeController extends Controller{
+    
     public HomeController(){
         super();
     }
@@ -26,9 +29,10 @@ public class HomeController extends Controller{
             resp.sendRedirect("login");
         }else{
             //TODO
-            User demo = new User("phan", "12222222");
-            req.setAttribute("demo", demo);
-            
+            HomeDAO homeDAO = new HomeDAO();
+            ArrayList<User> listUser = new ArrayList<>();
+            listUser = homeDAO.getListUser();
+            req.setAttribute("listUser", listUser);
             req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
         } 
     }

@@ -41,11 +41,11 @@ public class DBConnection {
     public boolean checkLogin(User user) {
         try {
             Statement state = this.conn.createStatement();
-            String sql = "SELECT username, password FROM players WHERE username = '" + user.getUserName() +"'";
+            String sql = "SELECT username, password FROM players WHERE username = '" + user.getUsername() +"'";
             System.out.println(sql);
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
-                if (user.getUserName().equals(rs.getString("username")) && user.getPassword().equals(rs.getString("password"))) {
+                if (user.getUsername().equals(rs.getString("username")) && user.getPassword().equals(rs.getString("password"))) {
                     return true;
                 }
             }

@@ -22,11 +22,10 @@ public class LoginDAO extends DBConnection{
     public boolean checkLogin(User user) {
         try {
             Statement state = this.conn.createStatement();
-            String sql = "SELECT username, password FROM players WHERE username = '" + user.getUserName() +"'";
-            System.out.println(sql);
+            String sql = "SELECT username, password FROM players WHERE username = '" + user.getUsername() +"'";
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
-                if (user.getUserName().equals(rs.getString("username")) && user.getPassword().equals(rs.getString("password"))) {
+                if (user.getUsername().equals(rs.getString("username")) && user.getPassword().equals(rs.getString("password"))) {
                     return true;
                 }
             }
