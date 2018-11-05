@@ -8,14 +8,11 @@ package controller;
 
 import DAO.LoginDAO;
 import model.User;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import utils.DBConnection;
+import javax.websocket.OnOpen;
 
 /**
  *
@@ -27,6 +24,7 @@ public class LoginController extends Controller {
     }
 
     @Override
+    @OnOpen
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (this.existUser(request)) {
             response.sendRedirect("home");
