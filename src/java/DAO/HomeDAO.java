@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,4 +40,27 @@ public class HomeDAO extends DBConnection {
         return listUser;
     }
     
+    public User getUserById(int id) {
+        PreparedStatement preState;
+        try {
+            String sql = " SELECT * "
+                        + " FROM players "
+                        + " WHERE id = ? ";
+            preState = this.conn.prepareStatement(sql);
+            preState.setInt(1, id);
+            ResultSet rs = preState.executeQuery();
+            if(rs.next()) {
+                User user = new User();
+                user.setID(rs.getInt("ID"));
+                user.setName(rs.getString("name"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setStatus(rs.getString("status"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

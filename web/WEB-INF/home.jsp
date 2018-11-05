@@ -17,27 +17,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-            html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-
-            }
-
-            td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #99b2c1;
-
-            }
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="class/styles.css" />
     </head>
     <body class="w3-theme-l5">
 
@@ -66,6 +46,7 @@
                 </div>
                 <div style="float: right">
                     <p>Welcome <%= user.getUsername()%>, <a href="logout">Log out </a><p>
+                        <input type="hidden" value="${user.getID()}" id="idUser"/>    
                 </div>
             </div>
         </div>
@@ -177,7 +158,7 @@
                     </div>
 
                     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                        <img src="phantuan.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+                        <img src="/img/phantuan.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
                         <span class="w3-right w3-opacity">1 min</span>
                         <h4>Phan Tuan</h4><br>
                         <hr class="w3-clear">
@@ -238,10 +219,10 @@
                                                 <td><c:out value="${u.getEmail()}"/></td>
                                                 <td>
                                                     <c:if test="${u.getStatus() == 1}">
-                                                        <img src="online.png" width="35%">
+                                                        <img src="/img/online.png" width="35%">
                                                     </c:if>
                                                     <c:if test="${u.getStatus() == 0}">
-                                                        <img src="offline.png" width="35%">
+                                                        <img src="/img/offline.png" width="35%">
                                                     </c:if>
                                                 </td>
                                     
