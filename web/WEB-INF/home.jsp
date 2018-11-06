@@ -219,13 +219,13 @@
                                                 <td><c:out value="${u.getEmail()}"/></td>
                                                 <td>
                                                     <c:if test="${u.getStatus() == 1}">
-                                                        <img src="/img/online.png" width="35%">
+                                                        <img src="\img\online.png" width="35%">
                                                     </c:if>
                                                     <c:if test="${u.getStatus() == 0}">
-                                                        <img src="/img/offline.png" width="35%">
+                                                        <img src="\img\offline.png" width="35%">
                                                     </c:if>
                                                 </td>
-                                    
+
                                             </tr>   
                                         </c:when>
                                         <c:otherwise>
@@ -235,10 +235,10 @@
                                                 <td><c:out value="${u.getEmail()}"/></td>
                                                 <td>
                                                     <c:if test="${u.getStatus() == 1}">
-                                                        <img src="online.png" width="35%">
+                                                        <img src="\img\online.png" width="35%">
                                                     </c:if>
                                                     <c:if test="${u.getStatus() == 0}">
-                                                        <img src="offline.png" width="35%">
+                                                        <img src="\img\offline.png" width="35%">
                                                     </c:if>
                                                 </td>
                                                 <c:if test="${u.getStatus() == 1}">
@@ -290,6 +290,26 @@
         </footer>
 
         <script>
+            var wsUri = "ws://" + document.location.host + "/laptrinhmang/actions";
+            var websocket = new WebSocket(wsUri);
+            websocket.onmessage = onMessage;
+//            socket.onopen = function (message) {
+//                processOpen(message);
+//            };
+//            function processOpen(message) {
+//                document.getElementById("Demo1").value += "IM web socket";
+//            }
+            function onMessage() {
+                var userId = document.getElementById("idUser");
+                var UserAction = {
+                    action: "add",
+                    id: userId
+                };
+                websocket.send(JSON.stringify(UserAction));
+            }
+            websocket.onopen = function (evt) {
+                onOpen(evt)
+            };
             // Accordion
             function myFunction(id) {
                 var x = document.getElementById(id);
@@ -315,7 +335,9 @@
 
             function challenge(id1, id2) { //id1 for who challenges, id2 for who is challenged
 
-                alert('Wanna challenge ' + id2  + " ???")
+                alert('Wanna challenge ' + id2 + " ???")
             }
+
+
         </script>
 </html>

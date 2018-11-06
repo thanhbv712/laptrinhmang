@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.ApplicationScoped;
+//import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.Session;
 import model.User;
 import org.json.simple.JSONObject;
@@ -21,7 +21,7 @@ import org.json.simple.JSONObject;
  *
  * @author buith
  */
-@ApplicationScoped
+//@ApplicationScoped
 public class UserSessionHandler {
     private final Set<Session> sessions = new HashSet<>();
     private final Set<User> users = new HashSet<>();

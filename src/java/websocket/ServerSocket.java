@@ -6,7 +6,6 @@
 package websocket;
 
 import DAO.HomeDAO;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.OnClose;
@@ -15,38 +14,25 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-//import javax.enterprise.context.ApplicationScoped;
-//import javax.inject.Inject;
 import model.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import javax.websocket.ContainerProvider;
-import javax.websocket.DeploymentException;
 
 /**
  *
  * @author buith
  */
-//@ApplicationScoped
-//@ServerEndpoint(value = "/actions")
-public class PlayerWebsocketEndpoint {
+@ServerEndpoint("/actions")
+public class ServerSocket {
 
+    private UserSessionHandler sessionHandler;
     private static String ADD_ACTION = "add";
     private static String REMOVE_ACTION = "remove";
     private static String TOGGLE_ACTION = "toggle";
-//    @Inject
-    private UserSessionHandler sessionHandler;
-
-//    public PlayerWebsocketEndpoint() throws URISyntaxException, DeploymentException, IOException{
-//        URI uri = new URI("ws://localhost:8080/PlayerWebsocket/server");
-//        ContainerProvider.getWebSocketContainer().connectToServer(this,uri);
-//    }
-    
-    @OnOpen
+   @OnOpen
     public void open(Session session) {
+        System.out.println(session.getId());
         sessionHandler.addSession(session);
     }
 
@@ -62,6 +48,7 @@ public class PlayerWebsocketEndpoint {
 
     @OnMessage
     public void handleMessage(String message, Session session) {
+        System.out.println(session);
         JSONParser parser = new JSONParser();
         HomeDAO dao = new HomeDAO();
         try {
@@ -84,4 +71,5 @@ public class PlayerWebsocketEndpoint {
             Logger.getLogger(PlayerWebsocketEndpoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }
